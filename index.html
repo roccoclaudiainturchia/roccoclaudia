@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Rocco e Claudia in Turchia</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Stili generali per la pagina */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #A7C7E7; /* Colore pastello azzurro */
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Contenitore del countdown */
+        #countdown-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff; /* Bianco per contrastare lo sfondo pastello */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        /* Stile per il titolo */
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Barra del countdown */
+        #countdown-bar {
+            width: 100%;
+            height: 40px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        /* Testo all'interno della barra */
+        #countdown {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Barra di progresso (azzurra) */
+        #progress-bar {
+            height: 100%;
+            background-color: #2196F3; /* Azzurro */
+            border-radius: 20px;
+            width: 0%; /* Partirà vuota, verrà aggiornata da JavaScript */
+        }
+
+        /* Stile del footer */
+        footer {
+            background-color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Sezione delle foto */
+        #foto {
+            background-color: #F4A7B9; /* Colore pastello rosa per la sezione foto */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .galleria img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        /* Stile per la sezione Altro */
+        #altro {
+            background-color: #B8E4B8; /* Colore pastello verde per la sezione Altro */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Countdown -->
+    <div id="countdown-container">
+        <h1>Countdown per il 29 Agosto</h1>
+        <div id="countdown-bar">
+            <div id="progress-bar"></div>
+            <div id="countdown">Caricamento...</div>
+        </div>
+    </div>
+
+    <header>
+        <h1>Rocco e Claudia in Turchia</h1>
+        <nav
+
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="#foto">Foto</a>
+            <a href="#altro">Altro</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Ciao a tutti!</h2>
+            <p>Un po' di tempo fa, abbiamo deciso di iscriverci ad una piattaforma chiamata WorkAway, dove pagando una piccola quota, puoi metterti in contatto con vari Host nel mondo. Il concetto è: fare poche ore di lavoro al giorno in cambio di vitto e alloggio. Dopo la nostra esperienza a Praga, abbiamo deciso di affrontare le nostre paure e provare a vivere per 1 mese da qualche parte in giro per il mondo. La ricerca dell'host non è stata semplice, ma un bel giorno, dopo aver mandato circa 20 messaggi, ci risponde lui... ALI.</p>
+        </section>
+
+        <section id="foto">
+            <h2>Foto</h2>
+            <p>Questa è una sezione dedicata alle foto del nostro viaggio in Turchia. Ecco alcune delle immagini che raccontano la nostra esperienza!</p>
+            <div class="galleria">
+                <img src="foto1.jpg" alt="Foto 1">
+                <img src="foto2.jpg" alt="Foto 2">
+                <img src="images/foto3.jpg" alt="Foto 3">
+                <img src="images/foto4.jpg" alt="Foto 4">
+                <img src="images/foto5.jpg" alt="Foto 5">
+            </div>
+        </section>
+
+        <!-- Sezione Altro -->
+        <section id="altro">
+            <h2>Altro</h2>
+            <p>Qui troverai ulteriori dettagli, curiosità e storie sul nostro viaggio! Scopri cosa ci ha ispirato e come abbiamo vissuto questa esperienza unica.</p>
+            <div class="contenuto-altro">
+                <p>Più informazioni arrivano presto...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Rocco e Cla</p>
+    </footer>
+
+    <script>
+        // Funzione per calcolare il countdown e la percentuale di progresso
+        function updateCountdown() {
+            const today = new Date();
+            const targetDate = new Date(today.getFullYear(), 7, 29); // 7 è agosto (mese 8-1)
+
+            if (today > targetDate) {
+                targetDate.setFullYear(today.getFullYear() + 1);
+            }
+
+            const timeDifference = targetDate - today;
+            const daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            // Calcola la percentuale di progresso
+            const totalDaysInYear = (new Date(today.getFullYear() + 1, 0, 1) - new Date(today.getFullYear(), 0, 1)) / (1000 * 60 * 60 * 24);
+            const progressPercent = ((totalDaysInYear - daysRemaining) / totalDaysInYear) * 100;
+
+            // Aggiorna il testo e la barra di progresso
+            document.getElementById('countdown').innerHTML = `Mancano ${daysRemaining} giorni!`;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+        }
+
+        // Inizializza il countdown e aggiorna ogni giorno
+        updateCountdown();
+        setInterval(updateCountdown, 1000 * 60 * 60 * 24); // Aggiorna ogni giorno
+    </script>
+</body>
+</html>
