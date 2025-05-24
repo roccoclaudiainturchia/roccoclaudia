@@ -38,6 +38,138 @@
    
     <footer>
         <p>Copyright 2025 – Rocco e Cla in Turchia</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Volo Torino - Istanbul</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+    }
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    .caption {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 1rem 0;
+      color: #003366;
+    }
+  </style>
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Volo Torino - Kayseri</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+    }
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    .caption {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 1rem 0;
+      color: #003366;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="caption">Il nostro viaggio</div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Crea la mappa centrata tra Torino e Kayseri
+    const map = L.map('map', {
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      keyboard: false
+    }).setView([43.1, 18.5], 5);
+
+    // Mappa azzurra stile "CartoDB Positron"
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Coordinate
+    const torino = [45.0703, 7.6869];
+    const kayseri = [38.7225, 35.4875];
+
+    // Linea tra Torino e Kayseri
+    const route = L.polyline([torino, kayseri], {
+      color: '#ff0000',
+      weight: 3,
+      dashArray: '5, 10'
+    }).addTo(map);
+
+    // Icona aereo personalizzata (più piccola)
+    const planeIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/69/69906.png',
+      iconSize: [25, 25],
+      iconAnchor: [12, 12]
+    });
+
+    // Marker aereo
+    const plane = L.marker(torino, { icon: planeIcon }).addTo(map);
+
+    // Animazione del volo
+    let steps = 300;
+    let delay = 20;
+    let i = 0;
+
+    function interpolate(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function animate() {
+      if (i <= steps) {
+        const t = i / steps;
+        const lat = interpolate(torino[0], kayseri[0], t);
+        const lng = interpolate(torino[1], kayseri[1], t);
+        plane.setLatLng([lat, lng]);
+        i++;
+        setTimeout(animate, delay);
+      }
+    }
+
+    animate();
+  </script>
+</body>
+</html>
+
     </footer>
 </body>
 </html>
